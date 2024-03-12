@@ -162,16 +162,53 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本文包含以下部分:</p>
+        <h1 id="Datawhale动手数据分析第一章"><a href="#Datawhale动手数据分析第一章" class="headerlink" title="Datawhale动手数据分析第一章"></a><strong>Datawhale动手数据分析第一章</strong></h1><p>学习资料：<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/hands-on-data-analysis">https://github.com/datawhalechina/hands-on-data-analysis</a> </p>
+<p>本文包含以下部分:</p>
 <ul>
 <li>数据加载和初步观察</li>
 <li>pandas基础</li>
-<li>数据探索性分析（EDA）</li>
+<li>简单数据探索性分析</li>
 </ul>
-<h2 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a><strong>数据加载</strong></h2><h3 id="载入数据"><a href="#载入数据" class="headerlink" title="载入数据"></a>载入数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dataframe=pd.read_csv()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分块读取</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="初步观察"><a href="#初步观察" class="headerlink" title="初步观察"></a>初步观察</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">df.head(n:<span class="built_in">int</span>)      <span class="comment"># 查看前n行数据，n默认5</span></span><br><span class="line">df.tail(n:<span class="built_in">int</span>)      <span class="comment"># 查看后n行数据，n默认5 </span></span><br><span class="line">df.info()           <span class="comment"># 总览每一列的表头，非空值数量和数据类型</span></span><br><span class="line">df.isnull()         <span class="comment"># 判断列表的每一个位置是否为空，返回与df大小相同的真值表</span></span><br><span class="line">df.describe()       <span class="comment"># 查看数据集各个特征的一些基本统计量</span></span><br><span class="line">df.shape</span><br><span class="line">df.columns</span><br><span class="line">df.append()</span><br></pre></td></tr></table></figure>
+<h2 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a><strong>数据加载</strong></h2><h3 id="载入数据"><a href="#载入数据" class="headerlink" title="载入数据"></a>载入数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataframe=pd.read_csv(<span class="string">&quot;filepath_or_buffer&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>可选参数</strong>：</p>
+<ul>
+<li><strong>sep</strong> ：用于分隔字段的字符。默认为逗号。如果 CSV 文件使用其他字符作为分隔符，可以通过此参数指定。<blockquote>
+<p>比如你发现所有数据都挤到一个格子里啦~</p>
+</blockquote>
+</li>
+<li><strong>encoding</strong> ：文件编码方式，比如中英文转化乱码时需要指定。不同的操作系统保存下来也可能会有乱码。</li>
+<li><strong>index_col</strong> ：用作行索引的列编号或列名。如果设置为 False则不将任何列用作索引。默认情况下使用默认的整数索引。</li>
+<li><strong>names</strong> ：用来重置表头。</li>
+<li><strong>chunksize</strong> ：按块读取数据，返回可迭代的一定行数的Dataframe。</li>
+</ul>
+<h3 id="初步观察"><a href="#初步观察" class="headerlink" title="初步观察"></a>初步观察</h3><p>熟悉表头，数据样式，数据类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">df.head(n)      <span class="comment"># 查看前n行数据，n默认5</span></span><br><span class="line">df.tail(n)      <span class="comment"># 查看后n行数据，n默认5 </span></span><br><span class="line">df.info()           <span class="comment"># 总览每一列的表头，非空值数量和数据类型</span></span><br><span class="line">df.isnull()         <span class="comment"># 判断列表的每一个位置是否为空，返回与df大小相同的真值表</span></span><br><span class="line">df.describe()       <span class="comment"># 查看数据集各个特征的一些基本统计量</span></span><br><span class="line">df.shape            <span class="comment"># 查看数据表大小</span></span><br><span class="line">df.columns          <span class="comment"># 查看列名      </span></span><br></pre></td></tr></table></figure>
 
-<h3 id="Pandas简单索引"><a href="#Pandas简单索引" class="headerlink" title="Pandas简单索引"></a>Pandas简单索引</h3>
+<h2 id="Pandas简单基础"><a href="#Pandas简单基础" class="headerlink" title="Pandas简单基础"></a><strong>Pandas简单基础</strong></h2><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>列索引：<br>两种方法均可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.columns_names</span><br><span class="line">df.[<span class="string">&#x27;columns_names&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>iloc和loc</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.iloc[]  <span class="comment"># 位置索引</span></span><br><span class="line">df.loc[]   <span class="comment"># 标签索引</span></span><br></pre></td></tr></table></figure>
+
+<p>直接看例子吧：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">df.iloc[<span class="number">0</span>]       <span class="comment"># 选择第一行  </span></span><br><span class="line">df.iloc[:, <span class="number">0</span>]    <span class="comment"># 选择第一列  </span></span><br><span class="line">df.iloc[<span class="number">1</span>:<span class="number">3</span>, :]  <span class="comment"># 选择第二行到第三行（不包括第四行），所有列  </span></span><br><span class="line">df.iloc[[<span class="number">0</span>, <span class="number">2</span>]]  <span class="comment"># 选择第一行和第三行</span></span><br><span class="line"></span><br><span class="line">df.loc[<span class="string">&#x27;a&#x27;</span>]          <span class="comment"># 选择行标签为&#x27;a&#x27;的行  </span></span><br><span class="line">df.loc[:, <span class="string">&#x27;column1&#x27;</span>] <span class="comment"># 选择名为&#x27;column1&#x27;的列  </span></span><br><span class="line">df.loc[<span class="string">&#x27;a&#x27;</span>:<span class="string">&#x27;c&#x27;</span>, :]   <span class="comment"># 选择行标签从&#x27;a&#x27;到&#x27;c&#x27;的所有行，所有列  </span></span><br><span class="line">df.loc[[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]]   <span class="comment"># 选择行标签为&#x27;a&#x27;和&#x27;c&#x27;的行</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>一个是按值排序，一个是按索引排序，<code>ascending</code>指定升降序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.sort_values(by=[<span class="string">&#x27;col_na&#x27;</span>],ascending=<span class="literal">True</span>)</span><br><span class="line">df.sort_index(axis=<span class="number">1</span>,ascending=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据删除"><a href="#数据删除" class="headerlink" title="数据删除"></a>数据删除</h3><p><code>df.drop()</code>和<code>del df[&#39;&#39;]</code>都可以用来删除列。</p>
+<p>二者对比：</p>
+<ul>
+<li><strong>功能</strong>：drop不仅可以删除列，还可以删除行。而del仅用于删除列。</li>
+<li><strong>操作方式</strong>：drop方法更灵活，可以接受标签名称作为参数来指定要删除的行或列，还可以选择是否在原始DataFrame上进行修改（通过设置<code>inplace=True</code>）或返回一个新的DataFrame对象。而del操作符则直接删除指定的列，不会返回新的对象。</li>
+</ul>
+<blockquote>
+<p>在对数据进行切片、过滤或排序后，索引可能变得不连续或无序。可以使用<code>reset_index()</code>重置索引</p>
+</blockquote>
+<h2 id="探索性数据分析"><a href="#探索性数据分析" class="headerlink" title="探索性数据分析"></a><strong>探索性数据分析</strong></h2><p>教程主要做了一些描述性统计和数据的算数运算，简单查看了一些数据的特征和不同变量间的相关性。</p>
+<p>因此，我认为这部分工作主要取决于个人的习惯和数据直觉。即充分的满足自己对数据的好奇。</p>
+<p>此处不再，之后做特征工程时整理更详细的EDA方法。</p>
+
       
 
       
@@ -184,81 +221,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/03/12/6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/12/09/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2023/12/09/hello-world/" class="archive-article-date">
-  	<time datetime="2023-12-09T14:35:26.585Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-12-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/12/09/hello-world/">展开全文 >></a>
         </p>
       
 
