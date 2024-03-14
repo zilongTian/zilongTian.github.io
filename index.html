@@ -182,29 +182,15 @@
 <li><p><strong>对缺失值进行处理</strong></p>
 <ul>
 <li><strong>直接删除</strong>：缺失值的行或列不多，可以直接删除包含缺失值的行或列。<br>  <code>dropna</code> 方法用于删除包含缺失值的行或列。<blockquote>
-<p><strong>参数：</strong></p>
+<p><strong>参数：</strong><br>     * <code>axis</code>：0 或 1，默认为 0。0 表示行，1 表示列。<br>     * <code>how</code>：’all’ 或 ‘any’，默认为 ‘any’。’all’ 表示只有当行或列的所有值都是 NaN 时才删除，’any’ 表示只要行或列中有一个值是 NaN 就删除。<br>     * <code>thresh</code>：int，可选。指定需要保留的非 NA&#x2F;null 值的最小数量。<br>     * <code>subset</code>：列标签的列表，可选。表示要考虑其 NaN 值的列的子集。<br>     * <code>inplace</code>：bool，默认为 False。如果为 True，则修改原始 DataFrame。否则，返回一个新的 DataFrame。</p>
 </blockquote>
-<ul>
-<li><code>axis</code>：0 或 1，默认为 0。0 表示行，1 表示列。</li>
-<li><code>how</code>：’all’ 或 ‘any’，默认为 ‘any’。’all’ 表示只有当行或列的所有值都是 NaN 时才删除，’any’ 表示只要行或列中有一个值是 NaN 就删除。</li>
-<li><code>thresh</code>：int，可选。指定需要保留的非 NA&#x2F;null 值的最小数量。</li>
-<li><code>subset</code>：列标签的列表，可选。表示要考虑其 NaN 值的列的子集。</li>
-<li><code>inplace</code>：bool，默认为 False。如果为 True，则修改原始 DataFrame。否则，返回一个新的 DataFrame。</li>
-</ul>
 </li>
 </ul>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment"># 删除包含缺失值的行</span></span><br><span class="line">df_dropped = df.dropna()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除包含缺失值的列</span></span><br><span class="line">df_dropped = df.dropna(axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>填充</strong>：可以使用均值、中位数、众数等统计量来填充缺失值。或者用0填充标记缺失值。<br> <code>fillna</code> 方法用于填充缺失值。<blockquote>
-<p><strong>参数：</strong></p>
+<p><strong>参数：</strong><br>     * <code>value</code>：用于填充缺失值的值。可以是标量、字典或 Series。如果指定了一个字典，那么字典的键应该是列名，值应该是用于填充该列缺失值的值。如果指定了一个 Series，那么它的索引应该是列名。<br>     * <code>method</code>：{‘backfill’, ‘bfill’, ‘pad’, ‘ffill’, None}，默认为 None。指定用于填充缺失值的方法。’backfill’ 或 ‘bfill’ 表示使用下一个非缺失值进行填充，’pad’ 或 ‘ffill’ 表示使用前一个非缺失值进行填充。<br>     * <code>axis</code>：0 或 1，默认为 0。指定填充的轴。0 表示行，1 表示列。但请注意，当使用 method 参数时，axis 只能为 0 或 None。<br>     * <code>inplace</code>：bool，默认为 False。如果为 True，则修改原始 DataFrame。否则，返回一个新的 DataFrame。<br>     * <code>limit</code>：int，可选。指定在前向或后向填充时的最大填充数量。</p>
 </blockquote>
-<ul>
-<li><code>value</code>：用于填充缺失值的值。可以是标量、字典或 Series。如果指定了一个字典，那么字典的键应该是列名，值应该是用于填充该列缺失值的值。如果指定了一个 Series，那么它的索引应该是列名。</li>
-<li><code>method</code>：{‘backfill’, ‘bfill’, ‘pad’, ‘ffill’, None}，默认为 None。指定用于填充缺失值的方法。’backfill’ 或 ‘bfill’ 表示使用下一个非缺失值进行填充，’pad’ 或 ‘ffill’ 表示使用前一个非缺失值进行填充。</li>
-<li><code>axis</code>：0 或 1，默认为 0。指定填充的轴。0 表示行，1 表示列。但请注意，当使用 method 参数时，axis 只能为 0 或 None。</li>
-<li><code>inplace</code>：bool，默认为 False。如果为 True，则修改原始 DataFrame。否则，返回一个新的 DataFrame。</li>
-<li><code>limit</code>：int，可选。指定在前向或后向填充时的最大填充数量。</li>
-</ul>
 </li>
 </ul>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment"># 使用均值填充数值型列的缺失值</span></span><br><span class="line">   df[<span class="string">&#x27;column1&#x27;</span>].fillna(df[<span class="string">&#x27;column1&#x27;</span>].mean(), inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用众数填充分类型列的缺失值</span></span><br><span class="line">df[<span class="string">&#x27;column2&#x27;</span>].fillna(df[<span class="string">&#x27;column2&#x27;</span>].mode()[<span class="number">0</span>], inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure></li>
