@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://haomeng.work">
-  <title>Archives: 2024/3 | Litten的博客</title>
+  <title>Datawhale动手数据分析第二章第一节 | Litten的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="华中科技大学09级，就职于腾讯SNG。擅长各项前端技能，深入研究移动端开发与前端性能。非专业视觉设计师。此为博客一枚。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Litten的博客">
-<meta property="og:url" content="https://haomeng.work/archives/2024/03/index.html">
+  <meta name="description" content="Datawhale动手数据分析第二章第一节学习资料：https:&#x2F;&#x2F;github.com&#x2F;datawhalechina&#x2F;hands-on-data-analysis  本文列举了简单的数据清洗方法，包含以下几部分：  缺失值，重复值，异常值观察和处理 连续变量分桶 离散变量编码  数据清洗缺失值 缺失值观察   df.info() ：查看数据框中每列的数据类型和非空值的数量。  df.isnull">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Datawhale动手数据分析第二章第一节">
+<meta property="og:url" content="https://haomeng.work/2024/03/14/2-1/index.html">
 <meta property="og:site_name" content="Litten的博客">
-<meta property="og:description" content="华中科技大学09级，就职于腾讯SNG。擅长各项前端技能，深入研究移动端开发与前端性能。非专业视觉设计师。此为博客一枚。">
+<meta property="og:description" content="Datawhale动手数据分析第二章第一节学习资料：https:&#x2F;&#x2F;github.com&#x2F;datawhalechina&#x2F;hands-on-data-analysis  本文列举了简单的数据清洗方法，包含以下几部分：  缺失值，重复值，异常值观察和处理 连续变量分桶 离散变量编码  数据清洗缺失值 缺失值观察   df.info() ：查看数据框中每列的数据类型和非空值的数量。  df.isnull">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-14T13:26:05.000Z">
+<meta property="article:modified_time" content="2024-03-14T13:26:39.480Z">
 <meta property="article:author" content="Litten">
 <meta property="article:tag" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
 <meta name="twitter:card" content="summary">
@@ -140,76 +142,243 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-2-1" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Datawhale动手数据分析第二章第一节
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/03/14/2-1/" class="archive-article-date">
+
+        
+        <a href="/2024/03/14/2-1/" class="archive-article-date">
   	<time datetime="2024-03-14T13:26:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-14</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/03/14/2-1/">Datawhale动手数据分析第二章第一节</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Datawhale动手数据分析第二章第一节"><a href="#Datawhale动手数据分析第二章第一节" class="headerlink" title="Datawhale动手数据分析第二章第一节"></a><strong>Datawhale动手数据分析第二章第一节</strong></h1><p>学习资料：<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/hands-on-data-analysis">https://github.com/datawhalechina/hands-on-data-analysis</a> </p>
+<p>本文列举了简单的数据清洗方法，包含以下几部分：</p>
+<ol>
+<li>缺失值，重复值，异常值观察和处理</li>
+<li>连续变量分桶</li>
+<li>离散变量编码</li>
+</ol>
+<h2 id="数据清洗"><a href="#数据清洗" class="headerlink" title="数据清洗"></a>数据清洗</h2><h3 id="缺失值"><a href="#缺失值" class="headerlink" title="缺失值"></a>缺失值</h3><ol>
+<li><strong>缺失值观察</strong></li>
+</ol>
+<ul>
+<li><p><code>df.info()</code> ：查看数据框中每列的数据类型和非空值的数量。</p>
+</li>
+<li><p><code>df.isnull().sum()</code> ：计算每列的缺失值数量。</p>
+</li>
+</ul>
+<ol start="2">
+<li><p><strong>对缺失值进行处理</strong></p>
+<ul>
+<li><strong>直接删除</strong>：缺失值的行或列不多，可以直接删除包含缺失值的行或列。<br>  <code>dropna</code> 方法用于删除包含缺失值的行或列。<blockquote>
+<p><strong>参数：</strong></p>
+</blockquote>
+<ul>
+<li><code>axis</code>：0 或 1，默认为 0。0 表示行，1 表示列。</li>
+<li><code>how</code>：’all’ 或 ‘any’，默认为 ‘any’。’all’ 表示只有当行或列的所有值都是 NaN 时才删除，’any’ 表示只要行或列中有一个值是 NaN 就删除。</li>
+<li><code>thresh</code>：int，可选。指定需要保留的非 NA&#x2F;null 值的最小数量。</li>
+<li><code>subset</code>：列标签的列表，可选。表示要考虑其 NaN 值的列的子集。</li>
+<li><code>inplace</code>：bool，默认为 False。如果为 True，则修改原始 DataFrame。否则，返回一个新的 DataFrame。</li>
+</ul>
+</li>
+</ul>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment"># 删除包含缺失值的行</span></span><br><span class="line">df_dropped = df.dropna()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除包含缺失值的列</span></span><br><span class="line">df_dropped = df.dropna(axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>填充</strong>：可以使用均值、中位数、众数等统计量来填充缺失值。或者用0填充标记缺失值。<br> <code>fillna</code> 方法用于填充缺失值。<blockquote>
+<p><strong>参数：</strong></p>
+</blockquote>
+<ul>
+<li><code>value</code>：用于填充缺失值的值。可以是标量、字典或 Series。如果指定了一个字典，那么字典的键应该是列名，值应该是用于填充该列缺失值的值。如果指定了一个 Series，那么它的索引应该是列名。</li>
+<li><code>method</code>：{‘backfill’, ‘bfill’, ‘pad’, ‘ffill’, None}，默认为 None。指定用于填充缺失值的方法。’backfill’ 或 ‘bfill’ 表示使用下一个非缺失值进行填充，’pad’ 或 ‘ffill’ 表示使用前一个非缺失值进行填充。</li>
+<li><code>axis</code>：0 或 1，默认为 0。指定填充的轴。0 表示行，1 表示列。但请注意，当使用 method 参数时，axis 只能为 0 或 None。</li>
+<li><code>inplace</code>：bool，默认为 False。如果为 True，则修改原始 DataFrame。否则，返回一个新的 DataFrame。</li>
+<li><code>limit</code>：int，可选。指定在前向或后向填充时的最大填充数量。</li>
+</ul>
+</li>
+</ul>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment"># 使用均值填充数值型列的缺失值</span></span><br><span class="line">   df[<span class="string">&#x27;column1&#x27;</span>].fillna(df[<span class="string">&#x27;column1&#x27;</span>].mean(), inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用众数填充分类型列的缺失值</span></span><br><span class="line">df[<span class="string">&#x27;column2&#x27;</span>].fillna(df[<span class="string">&#x27;column2&#x27;</span>].mode()[<span class="number">0</span>], inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="重复值"><a href="#重复值" class="headerlink" title="重复值"></a>重复值</h3><ol>
+<li><strong>观察重复值</strong></li>
+</ol>
+<p><code>df.duplicated()</code>返回一个布尔型Series，其中的每个值都表示相应行是否是前面出现过的重复行。</p>
+<blockquote>
+<p><code>df.duplicated().sum()</code> 可以计算重复行的数量。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">duplicate_rows = df.duplicated().<span class="built_in">sum</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Number of duplicate rows: <span class="subst">&#123;duplicate_rows&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ol>
+<li><strong>对重复值进行处理</strong></li>
+</ol>
+<p>删除重复的行来保持数据的唯一性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.drop_duplicates(keep=<span class="string">&#x27;first&#x27;</span>, inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<h3 id="异常值"><a href="#异常值" class="headerlink" title="异常值"></a>异常值</h3><ol>
+<li><strong>识别异常值</strong></li>
+</ol>
+<p>可以使用描述性统计（如IQR）或可视化方法（如箱线图）来识别异常值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用IQR方法识别异常值</span></span><br><span class="line">Q1 = df[<span class="string">&#x27;column1&#x27;</span>].quantile(<span class="number">0.25</span>)</span><br><span class="line">Q3 = df[<span class="string">&#x27;column1&#x27;</span>].quantile(<span class="number">0.75</span>)</span><br><span class="line">IQR = Q3 - Q1</span><br><span class="line">lower_limit = Q1 - <span class="number">1.5</span> * IQR</span><br><span class="line">upper_limit = Q3 + <span class="number">1.5</span> * IQR</span><br><span class="line">outliers = df[(df[<span class="string">&#x27;column1&#x27;</span>] &lt; lower_limit) | (df[<span class="string">&#x27;column1&#x27;</span>] &gt; upper_limit)]</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>对异常值进行处理</strong></li>
+</ol>
+<p>处理异常值的方法取决于数据的性质和业务需求。常见的处理方法包括删除、替换为特定值（如NaN、中位数等）或使用其他方法进行转换。</p>
+<h2 id="数据编码"><a href="#数据编码" class="headerlink" title="数据编码"></a>数据编码</h2><h3 id="连续变量分桶"><a href="#连续变量分桶" class="headerlink" title="连续变量分桶"></a>连续变量分桶</h3><p><code>pd.cut()</code> 或 <code>pd.qcut()</code> 函数将连续变量划分为几个桶（区间）。</p>
+<ul>
+<li><p><strong><code>pd.cut()</code></strong> 用于将连续数字变量分割成<strong>指定数量的等宽区间</strong>。</p>
+<blockquote>
+<p><strong>参数：</strong><br>     - <code>x</code>：需要处理的数据。<br>     - <code>bins</code>：指定区间边界或区间的数量。可以是一个整数，表示区间的数量；也可以是一个列表或数组，表示区间的边界值。<br>     - <code>labels</code>：用于指定每个区间的标签，可以是一个列表或数组。如果未指定，则使用整数作为标签。</p>
+</blockquote>
+</li>
+</ul>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将数据分割成3个等宽区间</span></span><br><span class="line">result = pd.cut(data, bins=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义区间边界</span></span><br><span class="line">custom_bins = [<span class="number">0</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">10</span>]</span><br><span class="line">result_custom = pd.cut(data, bins=custom_bins)</span><br></pre></td></tr></table></figure>
 
+
+<ul>
+<li><p><code>pd.qcut()</code> 用于将连续数字变量分割成指定数量的<strong>等频</strong>区间。</p>
+<blockquote>
+<p><strong>参数：</strong><br>     - <code>x</code>：需要处理的数据。<br>     - <code>q</code>：指定区间的数量或一个表示分位数的列表。可以是一个整数，表示区间的数量；也可以是一个列表或数组，表示具体的分位数。<br>     - <code>labels</code>：用于指定每个区间的标签，可以是一个列表或数组。如果未指定，则使用整数作为标签。</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将数据分割成3个等频区间</span></span><br><span class="line">result = pd.qcut(data, q=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义分位数</span></span><br><span class="line">custom_quantiles = [<span class="number">0</span>, <span class="number">0.25</span>, <span class="number">0.5</span>, <span class="number">0.75</span>, <span class="number">1</span>]</span><br><span class="line">result_custom = pd.qcut(data, q=custom_quantiles)</span><br></pre></td></tr></table></figure>
+
+<h3 id="对文本（分类）变量进行编码"><a href="#对文本（分类）变量进行编码" class="headerlink" title="对文本（分类）变量进行编码"></a>对文本（分类）变量进行编码</h3><ol>
+<li>查看文本变量及种类<br>三种方法：</li>
+</ol>
+<ul>
+<li><code>value_counts()</code> 方法用于计算 Series 对象中每个唯一值出现的次数，按出现次数降序排列返回一个 Series 对象</li>
+<li><code>unique()</code> 方法用于返回 Series 对象的唯一值组成的 ndarray 对象。</li>
+<li><code>nunique()</code> 方法用于返回 Series 或 DataFrame 列中唯一值的数量。</li>
+</ul>
+<ol start="2">
+<li>对于文本或分类变量，可以使用标签编码（Label Encoding）或独热编码（One-Hot Encoding）进行转换。</li>
+</ol>
+<ul>
+<li><strong>标签编码</strong>：将每个类别标签替换为一个整数。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line"></span><br><span class="line">le = LabelEncoder()</span><br><span class="line">df[<span class="string">&#x27;column2_encoded&#x27;</span>] = le.fit_transform(df[<span class="string">&#x27;column2&#x27;</span>])  </span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>独热编码</strong>：为每个类别创建一个新的二进制列。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df_encoded = pd.get_dummies(df, columns=[<span class="string">&#x27;column2&#x27;</span>])  <span class="comment"># 假设 &#x27;column2&#x27; 是分类变量</span></span><br></pre></td></tr></table></figure>
+<h3 id="纯文本变量特征提取"><a href="#纯文本变量特征提取" class="headerlink" title="纯文本变量特征提取"></a>纯文本变量特征提取</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://haomeng.work/2024/03/14/2-1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/03/12/6/" class="archive-article-date">
-  	<time datetime="2024-03-12T13:51:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-12</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2024/03/12/6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Datawhale动手数据分析第一章</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/03/12/6/">Datawhale动手数据分析第一章</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -235,8 +404,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
