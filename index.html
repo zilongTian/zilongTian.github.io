@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +41,7 @@
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
-    <div class="left-col" q-class="show:isShow">
+    <div class="left-col" q-class="show:isShow" style="background: /img/left.png">
       
 <div class="intrude-less">
 	<header id="header" class="inner">
@@ -81,6 +82,8 @@
 				
 					<a class="zhihu" target="_blank" href="http://zhihu.com/people/sosniu" title="zhihu"><i class="icon-zhihu"></i></a>
 		        
+					<a class="mail" target="_blank" href="/1809395540@xjtu.edu.cn" title="mail"><i class="icon-mail"></i></a>
+		        
 			</div>
 		</nav>
 	</header>		
@@ -90,7 +93,7 @@
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
 <nav id="mobile-nav">
-  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+  	<div class="overlay js-overlay" style="background: #00000"></div>
 	<div class="btnctn js-mobile-btnctn">
   		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
 	</div>
@@ -115,6 +118,8 @@
 				<div class="social">
 					
 						<a class="zhihu" target="_blank" href="http://zhihu.com/people/sosniu" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+						<a class="mail" target="_blank" href="/1809395540@xjtu.edu.cn" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -153,6 +158,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+
+<!--显示阅读次数完毕-->
         
         <a href="/2024/03/14/2-1/" class="archive-article-date">
   	<time datetime="2024-03-14T13:26:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-14</time>
@@ -169,95 +177,7 @@
 <li>连续变量分桶</li>
 <li>离散变量编码</li>
 </ol>
-<h2 id="数据清洗"><a href="#数据清洗" class="headerlink" title="数据清洗"></a>数据清洗</h2><h3 id="缺失值"><a href="#缺失值" class="headerlink" title="缺失值"></a>缺失值</h3><ol>
-<li><strong>缺失值观察</strong></li>
-</ol>
-<ul>
-<li><p><code>df.info()</code> ：查看数据框中每列的数据类型和非空值的数量。</p>
-</li>
-<li><p><code>df.isnull().sum()</code> ：计算每列的缺失值数量。</p>
-</li>
-</ul>
-<ol start="2">
-<li><p><strong>对缺失值进行处理</strong></p>
-<ul>
-<li><strong>直接删除</strong>：缺失值的行或列不多，可以直接删除包含缺失值的行或列。<br>  <code>dropna</code> 方法用于删除包含缺失值的行或列。<blockquote>
-<p><strong>参数：</strong><br>     * <code>axis</code>：0 或 1，默认为 0。0 表示行，1 表示列。<br>     * <code>how</code>：’all’ 或 ‘any’，默认为 ‘any’。’all’ 表示只有当行或列的所有值都是 NaN 时才删除，’any’ 表示只要行或列中有一个值是 NaN 就删除。<br>     * <code>thresh</code>：int，可选。指定需要保留的非 NA&#x2F;null 值的最小数量。<br>     * <code>subset</code>：列标签的列表，可选。表示要考虑其 NaN 值的列的子集。<br>     * <code>inplace</code>：bool，默认为 False。如果为 True，则修改原始 DataFrame。否则，返回一个新的 DataFrame。</p>
-</blockquote>
-</li>
-</ul>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment"># 删除包含缺失值的行</span></span><br><span class="line">df_dropped = df.dropna()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除包含缺失值的列</span></span><br><span class="line">df_dropped = df.dropna(axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>填充</strong>：可以使用均值、中位数、众数等统计量来填充缺失值。或者用0填充标记缺失值。<br> <code>fillna</code> 方法用于填充缺失值。<blockquote>
-<p><strong>参数：</strong><br>     * <code>value</code>：用于填充缺失值的值。可以是标量、字典或 Series。如果指定了一个字典，那么字典的键应该是列名，值应该是用于填充该列缺失值的值。如果指定了一个 Series，那么它的索引应该是列名。<br>     * <code>method</code>：{‘backfill’, ‘bfill’, ‘pad’, ‘ffill’, None}，默认为 None。指定用于填充缺失值的方法。’backfill’ 或 ‘bfill’ 表示使用下一个非缺失值进行填充，’pad’ 或 ‘ffill’ 表示使用前一个非缺失值进行填充。<br>     * <code>axis</code>：0 或 1，默认为 0。指定填充的轴。0 表示行，1 表示列。但请注意，当使用 method 参数时，axis 只能为 0 或 None。<br>     * <code>inplace</code>：bool，默认为 False。如果为 True，则修改原始 DataFrame。否则，返回一个新的 DataFrame。<br>     * <code>limit</code>：int，可选。指定在前向或后向填充时的最大填充数量。</p>
-</blockquote>
-</li>
-</ul>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment"># 使用均值填充数值型列的缺失值</span></span><br><span class="line">   df[<span class="string">&#x27;column1&#x27;</span>].fillna(df[<span class="string">&#x27;column1&#x27;</span>].mean(), inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用众数填充分类型列的缺失值</span></span><br><span class="line">df[<span class="string">&#x27;column2&#x27;</span>].fillna(df[<span class="string">&#x27;column2&#x27;</span>].mode()[<span class="number">0</span>], inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="重复值"><a href="#重复值" class="headerlink" title="重复值"></a>重复值</h3><ol>
-<li><strong>观察重复值</strong></li>
-</ol>
-<p><code>df.duplicated()</code>返回一个布尔型Series，其中的每个值都表示相应行是否是前面出现过的重复行。</p>
-<blockquote>
-<p><code>df.duplicated().sum()</code> 可以计算重复行的数量。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">duplicate_rows = df.duplicated().<span class="built_in">sum</span>()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Number of duplicate rows: <span class="subst">&#123;duplicate_rows&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><strong>对重复值进行处理</strong></li>
-</ol>
-<p>删除重复的行来保持数据的唯一性。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.drop_duplicates(keep=<span class="string">&#x27;first&#x27;</span>, inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="异常值"><a href="#异常值" class="headerlink" title="异常值"></a>异常值</h3><ol>
-<li><strong>识别异常值</strong></li>
-</ol>
-<p>可以使用描述性统计（如IQR）或可视化方法（如箱线图）来识别异常值。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用IQR方法识别异常值</span></span><br><span class="line">Q1 = df[<span class="string">&#x27;column1&#x27;</span>].quantile(<span class="number">0.25</span>)</span><br><span class="line">Q3 = df[<span class="string">&#x27;column1&#x27;</span>].quantile(<span class="number">0.75</span>)</span><br><span class="line">IQR = Q3 - Q1</span><br><span class="line">lower_limit = Q1 - <span class="number">1.5</span> * IQR</span><br><span class="line">upper_limit = Q3 + <span class="number">1.5</span> * IQR</span><br><span class="line">outliers = df[(df[<span class="string">&#x27;column1&#x27;</span>] &lt; lower_limit) | (df[<span class="string">&#x27;column1&#x27;</span>] &gt; upper_limit)]</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><strong>对异常值进行处理</strong></li>
-</ol>
-<p>处理异常值的方法取决于数据的性质和业务需求。常见的处理方法包括删除、替换为特定值（如NaN、中位数等）或使用其他方法进行转换。</p>
-<h2 id="数据编码"><a href="#数据编码" class="headerlink" title="数据编码"></a>数据编码</h2><h3 id="连续变量分桶"><a href="#连续变量分桶" class="headerlink" title="连续变量分桶"></a>连续变量分桶</h3><p><code>pd.cut()</code> 或 <code>pd.qcut()</code> 函数将连续变量划分为几个桶（区间）。</p>
-<ul>
-<li><p><strong><code>pd.cut()</code></strong> 用于将连续数字变量分割成<strong>指定数量的等宽区间</strong>。</p>
-<blockquote>
-<p><strong>参数：</strong><br>     - <code>x</code>：需要处理的数据。<br>     - <code>bins</code>：指定区间边界或区间的数量。可以是一个整数，表示区间的数量；也可以是一个列表或数组，表示区间的边界值。<br>     - <code>labels</code>：用于指定每个区间的标签，可以是一个列表或数组。如果未指定，则使用整数作为标签。</p>
-</blockquote>
-</li>
-</ul>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将数据分割成3个等宽区间</span></span><br><span class="line">result = pd.cut(data, bins=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义区间边界</span></span><br><span class="line">custom_bins = [<span class="number">0</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">10</span>]</span><br><span class="line">result_custom = pd.cut(data, bins=custom_bins)</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li><p><code>pd.qcut()</code> 用于将连续数字变量分割成指定数量的<strong>等频</strong>区间。</p>
-<blockquote>
-<p><strong>参数：</strong><br>     - <code>x</code>：需要处理的数据。<br>     - <code>q</code>：指定区间的数量或一个表示分位数的列表。可以是一个整数，表示区间的数量；也可以是一个列表或数组，表示具体的分位数。<br>     - <code>labels</code>：用于指定每个区间的标签，可以是一个列表或数组。如果未指定，则使用整数作为标签。</p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将数据分割成3个等频区间</span></span><br><span class="line">result = pd.qcut(data, q=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义分位数</span></span><br><span class="line">custom_quantiles = [<span class="number">0</span>, <span class="number">0.25</span>, <span class="number">0.5</span>, <span class="number">0.75</span>, <span class="number">1</span>]</span><br><span class="line">result_custom = pd.qcut(data, q=custom_quantiles)</span><br></pre></td></tr></table></figure>
-
-<h3 id="对文本（分类）变量进行编码"><a href="#对文本（分类）变量进行编码" class="headerlink" title="对文本（分类）变量进行编码"></a>对文本（分类）变量进行编码</h3><ol>
-<li>查看文本变量及种类<br>三种方法：</li>
-</ol>
-<ul>
-<li><code>value_counts()</code> 方法用于计算 Series 对象中每个唯一值出现的次数，按出现次数降序排列返回一个 Series 对象</li>
-<li><code>unique()</code> 方法用于返回 Series 对象的唯一值组成的 ndarray 对象。</li>
-<li><code>nunique()</code> 方法用于返回 Series 或 DataFrame 列中唯一值的数量。</li>
-</ul>
-<ol start="2">
-<li>对于文本或分类变量，可以使用标签编码（Label Encoding）或独热编码（One-Hot Encoding）进行转换。</li>
-</ol>
-<ul>
-<li><strong>标签编码</strong>：将每个类别标签替换为一个整数。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line"></span><br><span class="line">le = LabelEncoder()</span><br><span class="line">df[<span class="string">&#x27;column2_encoded&#x27;</span>] = le.fit_transform(df[<span class="string">&#x27;column2&#x27;</span>])  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>独热编码</strong>：为每个类别创建一个新的二进制列。</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df_encoded = pd.get_dummies(df, columns=[<span class="string">&#x27;column2&#x27;</span>])  <span class="comment"># 假设 &#x27;column2&#x27; 是分类变量</span></span><br></pre></td></tr></table></figure>
-<h3 id="纯文本变量特征提取"><a href="#纯文本变量特征提取" class="headerlink" title="纯文本变量特征提取"></a>纯文本变量特征提取</h3>
+        
       
 
       
@@ -310,6 +230,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+
+<!--显示阅读次数完毕-->
         
         <a href="/2024/03/12/6/" class="archive-article-date">
   	<time datetime="2024-03-12T13:51:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-12</time>
@@ -326,46 +249,7 @@
 <li>pandas基础</li>
 <li>简单数据探索性分析</li>
 </ul>
-<h2 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a><strong>数据加载</strong></h2><h3 id="载入数据"><a href="#载入数据" class="headerlink" title="载入数据"></a>载入数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataframe=pd.read_csv(<span class="string">&quot;filepath_or_buffer&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>可选参数</strong>：</p>
-<ul>
-<li><strong>sep</strong> ：用于分隔字段的字符。默认为逗号。如果 CSV 文件使用其他字符作为分隔符，可以通过此参数指定。<blockquote>
-<p>比如你发现所有数据都挤到一个格子里啦~</p>
-</blockquote>
-</li>
-<li><strong>encoding</strong> ：文件编码方式，比如中英文转化乱码时需要指定。不同的操作系统保存下来也可能会有乱码。</li>
-<li><strong>index_col</strong> ：用作行索引的列编号或列名。如果设置为 False则不将任何列用作索引。默认情况下使用默认的整数索引。</li>
-<li><strong>names</strong> ：用来重置表头。</li>
-<li><strong>chunksize</strong> ：按块读取数据，返回可迭代的一定行数的Dataframe。</li>
-</ul>
-<h3 id="初步观察"><a href="#初步观察" class="headerlink" title="初步观察"></a>初步观察</h3><p>熟悉表头，数据样式，数据类型</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">df.head(n)      <span class="comment"># 查看前n行数据，n默认5</span></span><br><span class="line">df.tail(n)      <span class="comment"># 查看后n行数据，n默认5 </span></span><br><span class="line">df.info()           <span class="comment"># 总览每一列的表头，非空值数量和数据类型</span></span><br><span class="line">df.isnull()         <span class="comment"># 判断列表的每一个位置是否为空，返回与df大小相同的真值表</span></span><br><span class="line">df.describe()       <span class="comment"># 查看数据集各个特征的一些基本统计量</span></span><br><span class="line">df.shape            <span class="comment"># 查看数据表大小</span></span><br><span class="line">df.columns          <span class="comment"># 查看列名      </span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Pandas简单基础"><a href="#Pandas简单基础" class="headerlink" title="Pandas简单基础"></a><strong>Pandas简单基础</strong></h2><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>列索引：<br>两种方法均可</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.columns_names</span><br><span class="line">df.[<span class="string">&#x27;columns_names&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<p><strong>iloc和loc</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.iloc[]  <span class="comment"># 位置索引</span></span><br><span class="line">df.loc[]   <span class="comment"># 标签索引</span></span><br></pre></td></tr></table></figure>
-
-<p>直接看例子吧：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">df.iloc[<span class="number">0</span>]       <span class="comment"># 选择第一行  </span></span><br><span class="line">df.iloc[:, <span class="number">0</span>]    <span class="comment"># 选择第一列  </span></span><br><span class="line">df.iloc[<span class="number">1</span>:<span class="number">3</span>, :]  <span class="comment"># 选择第二行到第三行（不包括第四行），所有列  </span></span><br><span class="line">df.iloc[[<span class="number">0</span>, <span class="number">2</span>]]  <span class="comment"># 选择第一行和第三行</span></span><br><span class="line"></span><br><span class="line">df.loc[<span class="string">&#x27;a&#x27;</span>]          <span class="comment"># 选择行标签为&#x27;a&#x27;的行  </span></span><br><span class="line">df.loc[:, <span class="string">&#x27;column1&#x27;</span>] <span class="comment"># 选择名为&#x27;column1&#x27;的列  </span></span><br><span class="line">df.loc[<span class="string">&#x27;a&#x27;</span>:<span class="string">&#x27;c&#x27;</span>, :]   <span class="comment"># 选择行标签从&#x27;a&#x27;到&#x27;c&#x27;的所有行，所有列  </span></span><br><span class="line">df.loc[[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]]   <span class="comment"># 选择行标签为&#x27;a&#x27;和&#x27;c&#x27;的行</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>一个是按值排序，一个是按索引排序，<code>ascending</code>指定升降序。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.sort_values(by=[<span class="string">&#x27;col_na&#x27;</span>],ascending=<span class="literal">True</span>)</span><br><span class="line">df.sort_index(axis=<span class="number">1</span>,ascending=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="数据删除"><a href="#数据删除" class="headerlink" title="数据删除"></a>数据删除</h3><p><code>df.drop()</code>和<code>del df[&#39;&#39;]</code>都可以用来删除列。</p>
-<p>二者对比：</p>
-<ul>
-<li><strong>功能</strong>：drop不仅可以删除列，还可以删除行。而del仅用于删除列。</li>
-<li><strong>操作方式</strong>：drop方法更灵活，可以接受标签名称作为参数来指定要删除的行或列，还可以选择是否在原始DataFrame上进行修改（通过设置<code>inplace=True</code>）或返回一个新的DataFrame对象。而del操作符则直接删除指定的列，不会返回新的对象。</li>
-</ul>
-<blockquote>
-<p>在对数据进行切片、过滤或排序后，索引可能变得不连续或无序。可以使用<code>reset_index()</code>重置索引</p>
-</blockquote>
-<h2 id="探索性数据分析"><a href="#探索性数据分析" class="headerlink" title="探索性数据分析"></a><strong>探索性数据分析</strong></h2><p>教程主要做了一些描述性统计和数据的算数运算，简单查看了一些数据的特征和不同变量间的相关性。</p>
-<p>因此，我认为这部分工作主要取决于个人的习惯和数据直觉。即充分的满足自己对数据的好奇。</p>
-<p>此处不再，之后做特征工程时整理更详细的EDA方法。</p>
-
+        
       
 
       
@@ -413,21 +297,8 @@
           </div>
         </div>
       </div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2024 Litten
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
-    </div>
-  </div>
-</footer>
-
-<!--页面点击小红心-->
-<script type="text/javascript" src="/love.js"></script>
+      <div class="footer-right">
+</div>
     </div>
     <script>
 	var yiliaConfig = {
@@ -582,7 +453,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">你好&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
   	  	
     	</section>
     
