@@ -153,6 +153,114 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2-3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/03/18/2-3/">Datawhale动手数据分析第二章第四节</a>
+    </h1>
+  
+
+        <!--显示阅读次数-->
+
+<!--显示阅读次数完毕-->
+        
+        <a href="/2024/03/18/2-3/" class="archive-article-date">
+  	<time datetime="2024-03-18T15:33:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a><strong>数据可视化</strong></h1><p>学习资料：<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/hands-on-data-analysis">https://github.com/datawhalechina/hands-on-data-analysis</a> </p>
+<hr>
+<p><strong>一、图表代码编写</strong></p>
+<p>在Python中，<code>matplotlib</code>是最常用的数据可视化库之一，结合<code>pandas</code>可以方便地对数据进行处理和可视化。以下是一些常用图表的代码编写示例：</p>
+<ol>
+<li><strong>折线图</strong>：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">plt.plot(data)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>柱状图</strong>：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">data = &#123;<span class="string">&#x27;Category&#x27;</span>: [<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>], <span class="string">&#x27;Value&#x27;</span>: [<span class="number">10</span>, <span class="number">15</span>, <span class="number">7</span>]&#125;</span><br><span class="line">df = pd.DataFrame(data)</span><br><span class="line">df.plot(kind=<span class="string">&#x27;bar&#x27;</span>, x=<span class="string">&#x27;Category&#x27;</span>, y=<span class="string">&#x27;Value&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><strong>饼图</strong>：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sizes = [<span class="number">215</span>, <span class="number">130</span>, <span class="number">245</span>, <span class="number">210</span>]</span><br><span class="line">labels = [<span class="string">&#x27;Frogs&#x27;</span>, <span class="string">&#x27;Hogs&#x27;</span>, <span class="string">&#x27;Dogs&#x27;</span>, <span class="string">&#x27;Logs&#x27;</span>]</span><br><span class="line">plt.pie(sizes, labels=labels, autopct=<span class="string">&#x27;%1.1f%%&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><strong>散点图</strong>：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">y = [<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">plt.scatter(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>二、图表选择与应用场景</strong></p>
+<ol>
+<li><strong>折线图</strong>：适用于展示连续变量的变化趋势，如时间序列数据。通过折线的起伏可以直观地看出数据的变化规律。</li>
+<li><strong>柱状图</strong>：适用于比较不同类别之间的数量或大小差异。通过柱子的高低可以清晰地看出各个类别的对比情况。</li>
+<li><strong>饼图</strong>：适用于展示整体与部分之间的关系，即占比情况。通过扇形的大小可以直观地看出各个部分的占比情况。但类别过多时，饼图可能会显得过于拥挤。</li>
+<li><strong>散点图</strong>：适用于展示两个变量之间的关系，即相关性或分布趋势。通过点的分布可以初步判断两个变量之间是否存在某种关联或趋势。</li>
+</ol>
+<hr>
+<p><strong>三、可视化直观性提升技巧</strong></p>
+<ol>
+<li><strong>选择合适的图表类型</strong>：根据数据的特性和分析目的选择合适的图表类型，是提升可视化直观性的关键。需要根据实际情况进行选择。</li>
+<li><strong>添加标题和标签</strong>：为图表添加标题、坐标轴标签和图例等辅助信息，可以更好地理解图表所表达的内容。能够准确地传达数据的含义。</li>
+<li><strong>调整颜色和大小</strong>：通过调整图表的颜色和大小等视觉元素，可以突出重要的数据点或类别。颜色和大小的调整应符合一定的规律和标准，避免造成视觉上的混乱和误解。</li>
+<li><strong>排序和分组</strong>：对于包含多个类别或变量的图表，可以通过排序和分组等方式对数据进行整理和展示，使图表更加清晰和易于理解。排序可以按照数量大小、时间顺序等方式进行；分组则可以将相似的类别或变量归并在一起，减少图表的复杂度和混乱度。</li>
+</ol>
+<blockquote>
+<p>python的优势是对数据操作方便，可以快速的得到想要数据的统计图，如果追求图表的美观性直接处理好数据用origin画更有观赏性</p>
+</blockquote>
+<hr>
+<p><strong>小结</strong>：</p>
+<p>数据可视化是数据分析过程中不可或缺的一环，通过选择合适的图表类型和编写相应的代码，可以将数据以直观、易懂的方式呈现出来。后续应该会补充missingno，seaborn等库的绘图。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/03/18/2-3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
