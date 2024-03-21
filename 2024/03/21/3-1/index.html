@@ -7,13 +7,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://haomeng.work">
-  <title>昊萌的随笔</title>
+  <title>Datawhale动手数据分析第二章第四节.1 | 昊萌的随笔</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="昊萌的随笔">
-<meta property="og:url" content="https://haomeng.work/index.html">
+  <meta name="description" content="学习资料：https:&#x2F;&#x2F;github.com&#x2F;datawhalechina&#x2F;hands-on-data-analysis  第三章 模型搭建和评估经过前面的两章的知识点的学习，完成了对数据的基本了解，数据清洗，特征工程，数据可视化。这一章是使用数据，运用我们的数据以及结合业务来得到某些我们需要知道的结果。简单说就是：选择模型—输入数据—得到输出结果—评价模型-调整模型。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Datawhale动手数据分析第二章第四节.1">
+<meta property="og:url" content="https://haomeng.work/2024/03/21/3-1/index.html">
 <meta property="og:site_name" content="昊萌的随笔">
+<meta property="og:description" content="学习资料：https:&#x2F;&#x2F;github.com&#x2F;datawhalechina&#x2F;hands-on-data-analysis  第三章 模型搭建和评估经过前面的两章的知识点的学习，完成了对数据的基本了解，数据清洗，特征工程，数据可视化。这一章是使用数据，运用我们的数据以及结合业务来得到某些我们需要知道的结果。简单说就是：选择模型—输入数据—得到输出结果—评价模型-调整模型。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-21T14:39:45.000Z">
+<meta property="article:modified_time" content="2024-03-21T16:05:24.574Z">
 <meta property="article:author" content="昊萌">
 <meta property="article:tag" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
 <meta name="twitter:card" content="summary">
@@ -151,20 +155,26 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-3-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-3-1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/03/21/3-1/">Datawhale动手数据分析第二章第四节.1</a>
+    <h1 class="article-title" itemprop="name">
+      Datawhale动手数据分析第二章第四节.1
     </h1>
   
 
         <!--显示阅读次数-->
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+    阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+  </span>
+  </a>
 
 <!--显示阅读次数完毕-->
         
@@ -178,224 +188,86 @@
       
         <p>学习资料：<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/hands-on-data-analysis">https://github.com/datawhalechina/hands-on-data-analysis</a> </p>
 <h1 id="第三章-模型搭建和评估"><a href="#第三章-模型搭建和评估" class="headerlink" title="第三章 模型搭建和评估"></a>第三章 模型搭建和评估</h1><p>经过前面的两章的知识点的学习，完成了对数据的基本了解，数据清洗，特征工程，数据可视化。这一章是使用数据，运用我们的数据以及结合业务来得到某些我们需要知道的结果。简单说就是：选择模型—输入数据—得到输出结果—评价模型-调整模型。</p>
-        
-      
+<span id="more"></span>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
+<h2 id="数据处理与载入库"><a href="#数据处理与载入库" class="headerlink" title="数据处理与载入库"></a>数据处理与载入库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score, classification_report</span><br><span class="line"></span><br><span class="line">data = pd.read_csv(<span class="string">&#x27;clear_data.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/03/21/3-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2-3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/03/18/2-3/">Datawhale动手数据分析第二章第四节</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-        
-        <a href="/2024/03/18/2-3/" class="archive-article-date">
-  	<time datetime="2024-03-18T15:33:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a><strong>数据可视化</strong></h1><p>学习资料：<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/hands-on-data-analysis">https://github.com/datawhalechina/hands-on-data-analysis</a> </p>
-<hr>
-<p><strong>一、图表代码编写</strong></p>
-<p>在Python中，<code>matplotlib</code>是最常用的数据可视化库之一，结合<code>pandas</code>可以方便地对数据进行处理和可视化。以下是一些常用图表的代码编写示例：</p>
-<ol>
-<li><strong>折线图</strong>：</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">plt.plot(data)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/03/18/2-3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/03/14/2-1/">Datawhale动手数据分析第二章第一节</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-        
-        <a href="/2024/03/14/2-1/" class="archive-article-date">
-  	<time datetime="2024-03-14T13:26:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Datawhale动手数据分析第二章第一节"><a href="#Datawhale动手数据分析第二章第一节" class="headerlink" title="Datawhale动手数据分析第二章第一节"></a><strong>Datawhale动手数据分析第二章第一节</strong></h1><p>学习资料：<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/hands-on-data-analysis">https://github.com/datawhalechina/hands-on-data-analysis</a> </p>
-<p>本文列举了简单的数据清洗方法，包含以下几部分：</p>
-<ol>
-<li>缺失值，重复值，异常值观察和处理</li>
-<li>连续变量分桶</li>
-<li>离散变量编码</li>
-</ol>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/03/14/2-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-6" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/03/12/6/">Datawhale动手数据分析第一章</a>
-    </h1>
-  
-
-        <!--显示阅读次数-->
-
-<!--显示阅读次数完毕-->
-        
-        <a href="/2024/03/12/6/" class="archive-article-date">
-  	<time datetime="2024-03-12T13:51:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Datawhale动手数据分析第一章"><a href="#Datawhale动手数据分析第一章" class="headerlink" title="Datawhale动手数据分析第一章"></a><strong>Datawhale动手数据分析第一章</strong></h1><p>学习资料：<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/hands-on-data-analysis">https://github.com/datawhalechina/hands-on-data-analysis</a> </p>
-<p>本文包含以下部分:</p>
+<h2 id="划分数据集"><a href="#划分数据集" class="headerlink" title="划分数据集"></a>划分数据集</h2><h3 id="划分数据的方法"><a href="#划分数据的方法" class="headerlink" title="划分数据的方法"></a>划分数据的方法</h3><p>对于数据集的划分一般有三种方法：留出法，交叉验证法和自助法：</p>
 <ul>
-<li>数据加载和初步观察</li>
-<li>pandas基础</li>
-<li>简单数据探索性分析</li>
+<li><p><strong>①留出法</strong></p>
+<p>留出法是直接将数据集D划分为两个互斥的集合，其中一个集合作为训练集S，另一个作为测试集T。需要注意的是在划分的时候要尽可能保证数据分布的一致性，即避免因数据划分过程引入额外的偏差而对最终结果产生影响。为了保证数据分布的一致性，通常我们采用<strong>分层采样</strong>的方式来对数据进行采样。</p>
+<blockquote>
+<ul>
+<li>通常，会将数据集D中大约2&#x2F;3~4&#x2F;5的样本作为训练集，其余的作为测试集。</li>
+<li><strong>分层抽样</strong>:抽样时，将总体分成互不交叉的层，然后按照一定的比例，从各层独立地抽取一定数量的个体，将各层取出的个体合在一起作为样本。分层抽样可以避免样本不平衡的问题。</li>
 </ul>
-        
+</blockquote>
+</li>
+<li><p><strong>②交叉验证法</strong></p>
+<p><strong>k折交叉验证</strong>通常将数据集D分为k份，其中k-1份作为训练集，剩余的一份作为测试集，这样就可以获得k组训练&#x2F;测试集，可以进行k次训练与测试，最终返回的是k个测试结果的均值。交叉验证中数据集的划分依然是依据<strong>分层采样</strong>的方式来进行。</p>
+<p>对于交叉验证法，其k值的选取往往决定了评估结果的稳定性和保真性，<strong>通常k值选取10。</strong></p>
+<p>当k&#x3D;1的时候，我们称之为<strong>留一法</strong></p>
+</li>
+<li><p><strong>③自助法</strong></p>
+<p>我们每次从数据集D中取一个样本作为训练集中的元素，然后把该样本放回，重复该行为m次，这样我们就可以得到大小为m的训练集，在这里面有的样本重复出现，有的样本则没有出现过，我们把那些没有出现过的样本作为测试集。</p>
+<p>进行这样采样的原因是因为在D中约有36.8%的数据没有在训练集中出现过。留出法与交叉验证法都是使用<strong>分层采样</strong>的方式进行数据采样与划分，而自助法则是使用<strong>有放回重复采样</strong>的方式进行数据采样</p>
+</li>
+</ul>
+<p><strong>数据集划分总结</strong></p>
+<ul>
+<li>对于数据量充足的时候，通常采用<strong>留出法</strong>或者<strong>k折交叉验证法</strong>来进行训练&#x2F;测试集的划分；</li>
+<li>对于数据集小且难以有效划分训练&#x2F;测试集时使用<strong>自助法</strong>；</li>
+<li>对于数据集小且可有效划分的时候最好使用<strong>留一法</strong>来进行划分，因为这种方法最为准确</li>
+</ul>
+<h3 id="划分数据的代码实现"><a href="#划分数据的代码实现" class="headerlink" title="划分数据的代码实现"></a>划分数据的代码实现</h3><p>我们使用 <code>train_test_split</code> 函数来进行划分，同时采用分层抽样以确保每个类别在训练集和测试集中的比例与整体数据集相似。</p>
+<p>函数的基本使用如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>其中：</p>
+<ul>
+<li><code>X</code>：特征数据</li>
+<li><code>y</code>：标签数据</li>
+<li><code>test_size</code>：测试集的大小。可以是一个介于0到1之间的浮点数，表示测试集的比例，或者是一个整数，表示测试集的样本数量。</li>
+<li><code>random_state</code>：随机数生成器的种子或RandomState实例。这可以确保每次运行代码时都获得相同的划分，从而保证结果可以复现。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>后续补上k折交叉验证和自助法的代码！</strong></p>
+</blockquote>
+<h2 id="模型的创建·训练·预测"><a href="#模型的创建·训练·预测" class="headerlink" title="模型的创建·训练·预测"></a>模型的创建·训练·预测</h2><p>接下来，创建并训练两个模型：逻辑回归模型和随机森林分类器。逻辑回归虽然名为“回归”，但实际上是一种用于分类任务的线性模型。随机森林则是一种集成方法，通过构建多个决策树并结合它们的输出来进行分类。</p>
+<blockquote>
+<p>挖个坑，机器学习算法介绍和集成学习算法</p>
+</blockquote>
+<h3 id="逻辑回归模型"><a href="#逻辑回归模型" class="headerlink" title="逻辑回归模型"></a>逻辑回归模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建逻辑回归模型实例（默认参数）</span></span><br><span class="line">lr = LogisticRegression()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练模型</span></span><br><span class="line">lr.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出训练集和测试集的得分（准确率）</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Logistic Regression - Training set score: &#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(lr.score(X_train, y_train)))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Logistic Regression - Testing set score: &#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(lr.score(X_test, y_test)))</span><br></pre></td></tr></table></figure>
+
+<h3 id="随机森林分类器"><a href="#随机森林分类器" class="headerlink" title="随机森林分类器"></a>随机森林分类器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建随机森林分类器实例（默认参数）</span></span><br><span class="line">rfc = RandomForestClassifier()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练模型</span></span><br><span class="line">rfc.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出训练集和测试集的得分（准确率）</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Random Forest - Training set score: &#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(rfc.score(X_train, y_train)))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Random Forest - Testing set score: &#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(rfc.score(X_test, y_test)))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>继续挖坑，模型调参方法</p>
+</blockquote>
+<h3 id="模型预测"><a href="#模型预测" class="headerlink" title="模型预测"></a>模型预测</h3><p>在模型训练完成后，使用 <code>predict</code> 方法来进行预测，使用 <code>predict_proba</code> 方法来获取预测的概率值。此外，还可以使用分类报告（<code>classification_report</code>）来评估模型的性能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用逻辑回归模型进行预测</span></span><br><span class="line">lr_pred = lr.predict(X_test)</span><br><span class="line">lr_pred_proba = lr.predict_proba(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用随机森林模型进行预测</span></span><br><span class="line">rfc_pred = rfc.predict(X_test)</span><br><span class="line">rfc_pred_proba = rfc.predict_proba(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出逻辑回归模型的分类报告</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Logistic Regression Classification Report:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(classification_report(y_test, lr_pred))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出随机森林模型的分类报告</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Random Forest Classification Report:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(classification_report(y_test, rfc_pred))</span><br></pre></td></tr></table></figure>
+
+<p>分类报告提供了每个类别的精确度（precision）、召回率（recall）和F1分数等指标，有助于更全面地评估模型的性能。同时，预测的概率值可以用于绘制ROC曲线、计算AUC值等进一步评估模型的方法。</p>
+<ul>
+<li>预测标签的概率提供了模型对某个样本属于某个类别的信心水平。这可以帮助我们更好地理解模型的决策过程，并在需要时调整决策阈值。</li>
+</ul>
+<h2 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a>模型评估</h2><p>在机器学习中，模型评估是至关重要的一步。它帮助我们了解模型在未见过的数据上的表现，即模型的泛化能力。通过模型评估，我们可以决定是否信任模型的预测结果，以及是否需要对模型进行进一步的调整或优化。</p>
+<h3 id="交叉验证"><a href="#交叉验证" class="headerlink" title="交叉验证"></a>交叉验证</h3><p>将数据集多次划分，并训练多个模型，以获得更稳定、全面的评估结果。最常用的交叉验证方法是k折交叉验证，其中k是用户指定的数字，通常取5或10。</p>
+<h4 id="代码实现：交叉验证"><a href="#代码实现：交叉验证" class="headerlink" title="代码实现：交叉验证"></a>代码实现：交叉验证</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_score</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建逻辑回归模型实例</span></span><br><span class="line">lr = LogisticRegression(C=<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用10折交叉验证评估模型</span></span><br><span class="line">scores = cross_val_score(lr, X_train, y_train, cv=<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="k折越多的影响"><a href="#k折越多的影响" class="headerlink" title="k折越多的影响"></a>k折越多的影响</h4><p>当k折数增加时，每次迭代用于训练和验证的数据集将变得更小，可能导致评估结果的方差增大。但是，增加k折数也会使得每次迭代的训练和验证数据集更接近于整个数据集，从而可能获得更准确的评估结果。所以在选择k值时需要在方差和偏差之间做取舍。</p>
+<h3 id="混淆矩阵"><a href="#混淆矩阵" class="headerlink" title="混淆矩阵"></a>混淆矩阵</h3><p>混淆矩阵是评估二分类问题性能的一种工具。它通过比较模型的预测标签和真实标签来计算各类别的正确和错误分类数量。从混淆矩阵中，我们可以计算出准确率、精确率、召回率和F1分数等指标。</p>
+<h4 id="代码实现：混淆矩阵和分类报告"><a href="#代码实现：混淆矩阵和分类报告" class="headerlink" title="代码实现：混淆矩阵和分类报告"></a>代码实现：混淆矩阵和分类报告</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> confusion_matrix, classification_report</span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练模型</span></span><br><span class="line">lr.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型预测结果</span></span><br><span class="line">pred = lr.predict(X_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算混淆矩阵</span></span><br><span class="line">cm = confusion_matrix(y_train, pred)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Confusion Matrix:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(cm)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出精确率、召回率和F1分数</span></span><br><span class="line">report = classification_report(y_train, pred)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Classification Report:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(report)</span><br></pre></td></tr></table></figure>
+
+<h4 id="自己实现混淆矩阵时的注意事项"><a href="#自己实现混淆矩阵时的注意事项" class="headerlink" title="自己实现混淆矩阵时的注意事项"></a>自己实现混淆矩阵时的注意事项</h4><p>确保正确计算真正例（True Positives）、假正例（False Positives）、真负例（True Negatives）和假负例（False Negatives）的数量。</p>
+<h3 id="ROC曲线"><a href="#ROC曲线" class="headerlink" title="ROC曲线"></a>ROC曲线</h3><p>ROC曲线是一种用于评估二分类问题性能的图形工具。它绘制了真正例率（True Positive Rate，TPR）与假正例率（False Positive Rate，FPR）之间的关系。ROC曲线下的面积（AUC）越大，表示模型的性能越好。</p>
+<h4 id="代码实现：ROC曲线绘制"><a href="#代码实现：ROC曲线绘制" class="headerlink" title="代码实现：ROC曲线绘制"></a>代码实现：ROC曲线绘制</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_curve, auc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算ROC曲线的点</span></span><br><span class="line">fpr, tpr, thresholds = roc_curve(y_test, lr.decision_function(X_test))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算AUC值</span></span><br><span class="line">roc_auc = auc(fpr, tpr)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;AUC: &#123;:.2f&#125;&quot;</span>.<span class="built_in">format</span>(roc_auc))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制ROC曲线</span></span><br><span class="line">plt.plot(fpr, tpr, label=<span class="string">&quot;ROC Curve (AUC = &#123;:.2f&#125;)&quot;</span>.<span class="built_in">format</span>(roc_auc))</span><br><span class="line">plt.xlabel(<span class="string">&quot;False Positive Rate&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;True Positive Rate&quot;</span>)</span><br><span class="line">plt.legend(loc=<span class="string">&quot;lower right&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h4 id="多分类问题的ROC曲线绘制"><a href="#多分类问题的ROC曲线绘制" class="headerlink" title="多分类问题的ROC曲线绘制"></a>多分类问题的ROC曲线绘制</h4><p>对于多分类问题，可以将其拆分为多个二分类问题，并为每个类别绘制一个ROC曲线。另一种方法是使用一对一（One-vs-One）或一对多（One-vs-Rest）策略来计算每个类别的TPR和FPR，并绘制相应的ROC曲线。但是这种方法可能会使图形变得复杂且难以解释。因此通常会选择其他评估指标来处理多分类问题。</p>
+<h4 id="从ROC曲线中获取信息"><a href="#从ROC曲线中获取信息" class="headerlink" title="从ROC曲线中获取信息"></a>从ROC曲线中获取信息</h4><p>ROC曲线提供了模型在不同阈值下的性能表现。通过观察曲线的形状和AUC值，我们可以评估模型的分类能力。例如，如果ROC曲线靠近左上角（TPR高且FPR低），则表明模型具有较好的分类性能。此外，我们还可以根据具体需求选择合适的阈值来平衡真正例率和假正例率。</p>
+
       
 
       
@@ -406,16 +278,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/03/12/6/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://haomeng.work/2024/03/21/3-1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2024/03/18/2-3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Datawhale动手数据分析第二章第四节</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -430,13 +361,32 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%A8%A1%E5%9E%8B%E6%90%AD%E5%BB%BA%E5%92%8C%E8%AF%84%E4%BC%B0"><span class="toc-number">1.</span> <span class="toc-text">第三章 模型搭建和评估</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E8%BD%BD%E5%85%A5%E5%BA%93"><span class="toc-number">1.1.</span> <span class="toc-text">数据处理与载入库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%92%E5%88%86%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">1.2.</span> <span class="toc-text">划分数据集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%92%E5%88%86%E6%95%B0%E6%8D%AE%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.1.</span> <span class="toc-text">划分数据的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%92%E5%88%86%E6%95%B0%E6%8D%AE%E7%9A%84%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.2.</span> <span class="toc-text">划分数据的代码实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%9B%E5%BB%BA%C2%B7%E8%AE%AD%E7%BB%83%C2%B7%E9%A2%84%E6%B5%8B"><span class="toc-number">1.3.</span> <span class="toc-text">模型的创建·训练·预测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.1.</span> <span class="toc-text">逻辑回归模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E5%88%86%E7%B1%BB%E5%99%A8"><span class="toc-number">1.3.2.</span> <span class="toc-text">随机森林分类器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E9%A2%84%E6%B5%8B"><span class="toc-number">1.3.3.</span> <span class="toc-text">模型预测</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="toc-number">1.4.</span> <span class="toc-text">模型评估</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><span class="toc-number">1.4.1.</span> <span class="toc-text">交叉验证</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%EF%BC%9A%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">代码实现：交叉验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#k%E6%8A%98%E8%B6%8A%E5%A4%9A%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">k折越多的影响</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5"><span class="toc-number">1.4.2.</span> <span class="toc-text">混淆矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%EF%BC%9A%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5%E5%92%8C%E5%88%86%E7%B1%BB%E6%8A%A5%E5%91%8A"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">代码实现：混淆矩阵和分类报告</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5%E6%97%B6%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">自己实现混淆矩阵时的注意事项</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ROC%E6%9B%B2%E7%BA%BF"><span class="toc-number">1.4.3.</span> <span class="toc-text">ROC曲线</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%EF%BC%9AROC%E6%9B%B2%E7%BA%BF%E7%BB%98%E5%88%B6"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">代码实现：ROC曲线绘制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%E7%9A%84ROC%E6%9B%B2%E7%BA%BF%E7%BB%98%E5%88%B6"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">多分类问题的ROC曲线绘制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8EROC%E6%9B%B2%E7%BA%BF%E4%B8%AD%E8%8E%B7%E5%8F%96%E4%BF%A1%E6%81%AF"><span class="toc-number">1.4.3.3.</span> <span class="toc-text">从ROC曲线中获取信息</span></a></li></ol></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
 
 
+  
+  
+  
 
   
+
+  
+
   
 
 
@@ -449,8 +399,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
